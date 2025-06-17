@@ -1,0 +1,7 @@
+{
+  "name": "projeto-poke-api",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
