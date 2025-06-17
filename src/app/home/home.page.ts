@@ -28,7 +28,13 @@ export class HomePage implements OnInit {
 
   loadPokemons() {
     this.pokemonService.getPokemons(this.limit, this.offset).subscribe(response => {
-      this.pokemons = response.results;
+      this.pokemons = response.results.map((pokemon: any, index: number) => {
+        const id = this.offset + index + 1;
+        return {
+          name: pokemon.name,
+          image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
+        };
+      });
     });
   }
 }
