@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';  
 import { PokemonService } from '../services/pokemon.service';
 
 @Component({
@@ -20,7 +21,7 @@ export class HomePage implements OnInit {
   limit = 20;
   offset = 0;
 
-  constructor(private pokemonService: PokemonService) {}
+  constructor(private pokemonService: PokemonService, private router: Router) {}
 
   ngOnInit() {
     this.loadPokemons();
@@ -28,7 +29,6 @@ export class HomePage implements OnInit {
 
   loadPokemons() {
     this.pokemonService.getPokemons(this.limit, this.offset).subscribe(response => {
-      // Para cada Pokémon, criar URL da imagem usando o ID
       const newPokemons = response.results.map((pokemon: any) => {
         const id = this.getPokemonIdFromUrl(pokemon.url);
         return {
@@ -42,7 +42,6 @@ export class HomePage implements OnInit {
   }
 
   getPokemonIdFromUrl(url: string): number {
-    // Exemplo de URL da API: https://pokeapi.co/api/v2/pokemon/1/
     const parts = url.split('/');
     return parseInt(parts[parts.length - 2], 10);
   }
@@ -50,5 +49,9 @@ export class HomePage implements OnInit {
   carregarMais() {
     this.offset += this.limit;
     this.loadPokemons();
+  }
+
+  verDetalhes(pokemonName: string) {
+    this.router.navigate(['/pokemon-details', pokemonName]);
   }
 }

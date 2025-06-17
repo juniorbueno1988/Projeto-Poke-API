@@ -1,0 +1,10 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Detalhes do Pokémon</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" *ngIf="pokemonData">
+  <h2>Pokémon: {{ pokemonName }}</h2>
+  <img [src]="pokemonData.sprites.front_default" alt="{{ pokemonName }}" />
+</ion-content>

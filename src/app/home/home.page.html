@@ -6,7 +6,7 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let pokemon of pokemons">
+    <ion-item *ngFor="let pokemon of pokemons" (click)="verDetalhes(pokemon.name)" button detail>
       <ion-avatar slot="start">
         <img [src]="pokemon.image" [alt]="pokemon.name" />
       </ion-avatar>

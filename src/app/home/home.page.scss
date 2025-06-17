@@ -1,5 +1,5 @@
 ion-header {
-  --background: #f46720; /* Laranja */
+  --background: #f46720;
   color: white;
 
   ion-title {
@@ -10,16 +10,15 @@ ion-header {
 }
 
 ion-toolbar {
-  --background: #f46720; /* Mesma cor do header */
+  --background: #f46720;
   color: white;
-  height: 56px; /* Garante altura parecida com o header */
-  display: flex;
+  height: 56px; 
   align-items: center;
   justify-content: center;
 }
 
 ion-content {
-  --background: #f0f0f0; /* Cinza claro */
+  --background: #f0f0f0; 
   padding: 10px;
 }
 
@@ -66,9 +65,9 @@ ion-button {
   color: white;
   margin-top: 20px;
   width: 100%;
-  height: 56px; /* Mesma altura do toolbar */
-  text-transform: none; /* Remove caixa alta */
-  font-size: 20px;
+  height: 56px; 
+  text-transform: none;
+  font-size: 24px;
   font-weight: bold;
   border-radius: 8px;
   display: flex;
