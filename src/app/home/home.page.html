@@ -7,10 +7,16 @@
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let pokemon of pokemons">
-      <ion-thumbnail slot="start">
-        <img [src]="pokemon.image" [alt]="pokemon.name">
-      </ion-thumbnail>
-      {{ pokemon.name | titlecase }}
+      <ion-avatar slot="start">
+        <img [src]="pokemon.image" [alt]="pokemon.name" />
+      </ion-avatar>
+      <ion-label>
+        {{ pokemon.name | titlecase }}
+      </ion-label>
     </ion-item>
   </ion-list>
+
+  <ion-button expand="full" (click)="carregarMais()">
+    Carregar mais Pokémons
+  </ion-button>
 </ion-content>

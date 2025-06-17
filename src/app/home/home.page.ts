@@ -20,7 +20,7 @@ export class HomePage implements OnInit {
   limit = 20;
   offset = 0;
 
-  constructor(private pokemonService: PokemonService) { }
+  constructor(private pokemonService: PokemonService) {}
 
   ngOnInit() {
     this.loadPokemons();
@@ -28,13 +28,27 @@ export class HomePage implements OnInit {
 
   loadPokemons() {
     this.pokemonService.getPokemons(this.limit, this.offset).subscribe(response => {
-      this.pokemons = response.results.map((pokemon: any, index: number) => {
-        const id = this.offset + index + 1;
+      // Para cada Pokémon, criar URL da imagem usando o ID
+      const newPokemons = response.results.map((pokemon: any) => {
+        const id = this.getPokemonIdFromUrl(pokemon.url);
         return {
           name: pokemon.name,
           image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
         };
       });
+
+      this.pokemons = [...this.pokemons, ...newPokemons];
     });
+  }
+
+  getPokemonIdFromUrl(url: string): number {
+    // Exemplo de URL da API: https://pokeapi.co/api/v2/pokemon/1/
+    const parts = url.split('/');
+    return parseInt(parts[parts.length - 2], 10);
+  }
+
+  carregarMais() {
+    this.offset += this.limit;
+    this.loadPokemons();
   }
 }

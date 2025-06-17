@@ -9,6 +9,15 @@ ion-header {
   }
 }
 
+ion-toolbar {
+  --background: #f46720; /* Mesma cor do header */
+  color: white;
+  height: 56px; /* Garante altura parecida com o header */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 ion-content {
   --background: #f0f0f0; /* Cinza claro */
   padding: 10px;
@@ -46,7 +55,23 @@ ion-item span {
   color: #333;
 }
 
-ion-toolbar {
-  --background: #f46720; /* Mesma cor do header */
+ion-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+ion-button {
+  --background: #f46720;
   color: white;
+  margin-top: 20px;
+  width: 100%;
+  height: 56px; /* Mesma altura do toolbar */
+  text-transform: none; /* Remove caixa alta */
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
