@@ -1,3 +1,5 @@
+/* Estilo Geral */
+
 ion-header {
   --background: #f46720;
   color: white;
@@ -73,4 +75,76 @@ ion-button {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* ----------- RESPONSIVIDADE ----------- */
+
+/* Mobile (até 600px) */
+@media (max-width: 600px) {
+  ion-header ion-title {
+    font-size: 18px;
+  }
+
+  ion-toolbar {
+    height: 48px;
+  }
+
+  ion-content {
+    padding: 8px;
+  }
+
+  ion-item {
+    padding: 8px 10px;
+    gap: 10px;
+  }
+
+  ion-item img {
+    width: 40px;
+    height: 40px;
+    border-width: 1.5px;
+  }
+
+  ion-item span {
+    font-size: 14px;
+  }
+
+  ion-button {
+    font-size: 18px;
+    height: 48px;
+  }
+}
+
+/* Tablet (601px até 1024px) */
+@media (min-width: 601px) and (max-width: 1024px) {
+  ion-header ion-title {
+    font-size: 20px;
+  }
+
+  ion-toolbar {
+    height: 52px;
+  }
+
+  ion-content {
+    padding: 12px;
+  }
+
+  ion-item {
+    padding: 9px 12px;
+    gap: 12px;
+  }
+
+  ion-item img {
+    width: 50px;
+    height: 50px;
+    border-width: 1.8px;
+  }
+
+  ion-item span {
+    font-size: 16px;
+  }
+
+  ion-button {
+    font-size: 20px;
+    height: 52px;
+  }
 }

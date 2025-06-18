@@ -1,3 +1,4 @@
+/* Estilo atual (Desktop e geral) */
 ion-content {
   background-color: #1e1e1e; /* fundo escuro */
   color: #fff; /* texto branco */
@@ -71,3 +72,70 @@ ion-img {
   border: 1.5px solid #f46720;
   box-shadow: 0 3px 7px rgba(244, 103, 32, 0.6);
 }
+
+/* ----------- RESPONSIVIDADE ----------- */
+
+/* Mobile (até 600px) */
+@media (max-width: 600px) {
+  ion-content {
+    padding: 8px;
+  }
+
+  h2, h3 {
+    font-size: 18px;
+    margin-top: 12px;
+    margin-bottom: 6px;
+  }
+
+  ul {
+    gap: 8px;
+    max-width: 90%;
+  }
+
+  li {
+    font-size: 14px;
+    padding: 6px 10px;
+    flex: 1 1 100%; /* Faz os itens ficarem um embaixo do outro no mobile */
+  }
+
+  ion-img {
+    max-width: 120px;
+    max-height: 120px;
+    margin-bottom: 20px;
+  }
+
+  .sprites-container ion-img {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* Tablet (601px até 1024px) */
+@media (min-width: 601px) and (max-width: 1024px) {
+  h2, h3 {
+    font-size: 22px;
+  }
+
+  ul {
+    gap: 10px;
+    max-width: 80%;
+  }
+
+  li {
+    font-size: 16px;
+    padding: 8px 14px;
+    flex: 1 1 45%;
+  }
+
+  ion-img {
+    max-width: 150px;
+    max-height: 150px;
+  }
+
+  .sprites-container ion-img {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+/* Desktop acima de 1024px – continua com o que já tem */
