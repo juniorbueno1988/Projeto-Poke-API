@@ -1,10 +1,34 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Detalhes do Pokémon</ion-title>
+    <ion-title>{{ pokemonName | titlecase }} - Detalhes</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding" *ngIf="pokemonData">
-  <h2>Pokémon: {{ pokemonName }}</h2>
-  <img [src]="pokemonData.sprites.front_default" alt="{{ pokemonName }}" />
+<ion-content class="ion-padding">
+
+  <ion-img *ngIf="imageUrl" [src]="imageUrl" alt="Imagem do Pokémon"></ion-img>
+
+  <h2>Altura: {{ height }}</h2>
+  <h2>Peso: {{ weight }}</h2>
+
+  <h3>Tipos:</h3>
+  <ul>
+    <li *ngFor="let type of types">{{ type }}</li>
+  </ul>
+
+  <h3>Habilidades:</h3>
+  <ul>
+    <li *ngFor="let ability of abilities">{{ ability }}</li>
+  </ul>
+
+  <h3>Stats:</h3>
+  <ul>
+    <li *ngFor="let stat of stats">{{ stat.stat.name }}: {{ stat.base_stat }}</li>
+  </ul>
+
+  <h3>Outras imagens:</h3>
+  <div class="sprites-container">
+    <ion-img *ngFor="let sprite of sprites" [src]="sprite" alt="Sprite do Pokémon"></ion-img>
+  </div>
+
 </ion-content>
