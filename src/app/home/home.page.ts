@@ -1,25 +1,22 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { PokemonService } from '../services/pokemon.service';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';  
-import { PokemonService } from '../services/pokemon.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
   standalone: true,
-  imports: [
-    CommonModule,
-    IonicModule,
-    FormsModule
-  ]
+  imports: [CommonModule, IonicModule, FormsModule],
 })
 export class HomePage implements OnInit {
   pokemons: any[] = [];
-  limit = 20;
-  offset = 0;
+  favoritos: Set<string> = new Set();
+  limit = 7;          // Mostrar 6 por vez
+  offset = 0;          // Começa do 0
 
   constructor(private pokemonService: PokemonService, private router: Router) {}
 
@@ -29,7 +26,7 @@ export class HomePage implements OnInit {
 
   loadPokemons() {
     this.pokemonService.getPokemons(this.limit, this.offset).subscribe(response => {
-      const newPokemons = response.results.map((pokemon: any) => {
+      const novosPokemons = response.results.map((pokemon: any) => {
         const id = this.getPokemonIdFromUrl(pokemon.url);
         return {
           name: pokemon.name,
@@ -37,7 +34,7 @@ export class HomePage implements OnInit {
         };
       });
 
-      this.pokemons = [...this.pokemons, ...newPokemons];
+      this.pokemons = [...this.pokemons, ...novosPokemons];
     });
   }
 
@@ -51,7 +48,20 @@ export class HomePage implements OnInit {
     this.loadPokemons();
   }
 
-  verDetalhes(pokemonName: string) {
-    this.router.navigate(['/pokemon-details', pokemonName]);
+  verDetalhes(nome: string) {
+    this.router.navigate(['/pokemon-details', nome]);
+  }
+
+  isFavorito(nome: string): boolean {
+    return this.favoritos.has(nome);
+  }
+
+  toggleFavorito(nome: string, event: Event) {
+    event.stopPropagation();
+    if (this.favoritos.has(nome)) {
+      this.favoritos.delete(nome);
+    } else {
+      this.favoritos.add(nome);
+    }
   }
 }

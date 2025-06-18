@@ -1,8 +1,8 @@
-import { CommonModule, NgIf, NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { CommonModule, NgIf, NgFor } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
+import { PokemonService } from '../services/pokemon.service';
 
 @Component({
   selector: 'app-pokemon-details',
@@ -13,8 +13,6 @@ import { IonicModule } from '@ionic/angular';
 })
 export class PokemonDetailsPage implements OnInit {
   pokemonName: string = '';
-  pokemonData: any;
-
   imageUrl: string = '';
   height: number = 0;
   weight: number = 0;
@@ -22,8 +20,12 @@ export class PokemonDetailsPage implements OnInit {
   abilities: string[] = [];
   stats: any[] = [];
   sprites: string[] = [];
+  loading: boolean = true;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {}
+  constructor(
+    private route: ActivatedRoute,
+    private pokemonService: PokemonService
+  ) {}
 
   ngOnInit() {
     this.pokemonName = this.route.snapshot.paramMap.get('name') || '';
@@ -33,9 +35,8 @@ export class PokemonDetailsPage implements OnInit {
   }
 
   loadPokemon() {
-    this.http.get(`https://pokeapi.co/api/v2/pokemon/${this.pokemonName}`).subscribe(
-      (data: any) => {
-        this.pokemonData = data;
+    this.pokemonService.getPokemonDetails(this.pokemonName).subscribe({
+      next: (data: any) => {
         this.imageUrl = data.sprites.front_default;
         this.height = data.height;
         this.weight = data.weight;
@@ -48,10 +49,12 @@ export class PokemonDetailsPage implements OnInit {
           data.sprites.back_default,
           data.sprites.back_shiny,
         ];
+        this.loading = false;
       },
-      (error) => {
-        console.error('Erro ao buscar Pokémon', error);
-      }
-    );
+      error: (error) => {
+        console.error('Erro ao buscar Pokémon:', error);
+        this.loading = false;
+      },
+    });
   }
 }

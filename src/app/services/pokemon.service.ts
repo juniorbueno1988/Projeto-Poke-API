@@ -6,18 +6,17 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PokemonService {
-
   private baseUrl = 'https://pokeapi.co/api/v2';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  // Método para buscar lista de pokémons com paginação
+  // Buscar lista de pokémons com paginação
   getPokemons(limit: number = 20, offset: number = 0): Observable<any> {
-    return this.http.get(`${this.baseUrl}/pokemon?limit=${limit}&offset=${offset}`);
+    return this.http.get<any>(`${this.baseUrl}/pokemon?limit=${limit}&offset=${offset}`);
   }
 
-  // Método para buscar detalhes de um Pokémon pelo nome ou id
+  // Buscar detalhes de um Pokémon pelo nome ou id
   getPokemonDetails(nameOrId: string): Observable<any> {
-    return this.http.get(`${this.baseUrl}/pokemon/${nameOrId}`);
+    return this.http.get<any>(`${this.baseUrl}/pokemon/${nameOrId}`);
   }
 }
